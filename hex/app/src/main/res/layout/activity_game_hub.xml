@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="a"
         android:id="@+id/button"
-        android:background="#dd81773c"
+        android:background="#c4242424"
         android:textColor="#ffc4c4c4"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
