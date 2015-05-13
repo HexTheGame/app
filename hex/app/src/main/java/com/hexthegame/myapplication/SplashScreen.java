@@ -27,8 +27,6 @@ public class SplashScreen extends Activity {
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
 
-    public TextView textView = (TextView) findViewById(R.id.yourtextview);
-    public final Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/Oswald-Medium.ttf");
     private static final boolean AUTO_HIDE = true;
 
     /**
@@ -119,7 +117,7 @@ public class SplashScreen extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
