@@ -34,33 +34,28 @@
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
+        <activity
+            android:name=".GameHub"
+            android:label="@string/title_activity_game_hub" >
+        </activity>
+        <activity
+            android:name=".LeaderboardTab"
+            android:label="@string/title_activity_leaderboard_tab" >
+        </activity>
+        <activity
+            android:name=".CreateGameTab"
+            android:label="@string/title_activity_create_game_tab" >
+        </activity>
+        <activity
+            android:name=".ProfileTab"
+            android:label="@string/title_activity_profile_tab" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCSf68bXszL2e0Q2PTaNsXUNUktmBtsl5c" />
-
-        <activity
-            android:name=".GameHub"
-            android:label="@string/title_activity_game_hub" >
-        </activity>
-
-        <activity
-            android:name=".ProfileTab"
-            android:label="@string/title_activity_profile_tab" >
-        </activity>
-
-        <activity
-            android:name=".LeaderboardTab"
-            android:label="@string/title_activity_leaderboard_tab" >
-        </activity>
-
-        <activity
-            android:name=".CreateGameTab"
-            android:label="@string/title_activity_create_game_tab" >
-        </activity>
+            android:value="AIzaSyChew-YT7iCuAPY0p9Ed22eXIc2LJtKqDk" />
     </application>
-
 </manifest>

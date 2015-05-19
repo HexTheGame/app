@@ -24,14 +24,10 @@ public class Login extends Activity
     private boolean mIntentInProgress;
     private SignInButton mSignInButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        mSignInButton.setOnClickListener((View.OnClickListener) this);
-        mSignInButton.setStyle(1, 1);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -39,6 +35,8 @@ public class Login extends Activity
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
+        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        mSignInButton.setStyle(1, 0);
 
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +93,6 @@ public class Login extends Activity
             }
         }
     }
-
-
 
     protected void onStart() {
         super.onStart();
