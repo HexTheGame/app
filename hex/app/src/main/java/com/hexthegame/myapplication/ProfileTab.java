@@ -1,5 +1,6 @@
 package com.hexthegame.myapplication;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -8,12 +9,14 @@ import android.view.MenuItem;
 import com.hexthegame.myapplication.R;
 
 
-public class ProfileTab extends ActionBarActivity {
+public class ProfileTab extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
+        int width = this.getResources().getDisplayMetrics().widthPixels;
+        int height = this.getResources().getDisplayMetrics().heightPixels;
     }
 
 

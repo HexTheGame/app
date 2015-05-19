@@ -46,6 +46,21 @@
             android:name=".GameHub"
             android:label="@string/title_activity_game_hub" >
         </activity>
+
+        <activity
+            android:name=".ProfileTab"
+            android:label="@string/title_activity_profile_tab" >
+        </activity>
+
+        <activity
+            android:name=".LeaderboardTab"
+            android:label="@string/title_activity_leaderboard_tab" >
+        </activity>
+
+        <activity
+            android:name=".CreateGameTab"
+            android:label="@string/title_activity_create_game_tab" >
+        </activity>
     </application>
 
 </manifest>

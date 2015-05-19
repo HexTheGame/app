@@ -1,5 +1,6 @@
 package com.hexthegame.myapplication;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -8,7 +9,7 @@ import android.view.MenuItem;
 import com.hexthegame.myapplication.R;
 
 
-public class CreateGameTab extends ActionBarActivity {
+public class CreateGameTab extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
