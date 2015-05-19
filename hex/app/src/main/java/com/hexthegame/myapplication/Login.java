@@ -39,12 +39,23 @@ public class Login extends Activity
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
+
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.sign_in_button && !mGoogleApiClient.isConnecting()) {
+                    mSignInClicked = true;
+                    mGoogleApiClient.connect();
+                }
+            }
+        });
     }
 
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(Login.this, GameHub.class));
     }
 
     @Override
@@ -84,6 +95,8 @@ public class Login extends Activity
             }
         }
     }
+
+
 
     protected void onStart() {
         super.onStart();

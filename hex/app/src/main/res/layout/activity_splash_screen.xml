@@ -14,13 +14,13 @@
         android:textStyle="bold"
         android:textSize="50sp"
         android:gravity="center"
-        android:text="@string/dummy_content" />
+        android:text="what" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="518dp"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_gravity="center_horizontal|bottom"
         android:background="#ff8cff62">
