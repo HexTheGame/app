@@ -1,18 +1,55 @@
 package com.hexthegame.myapplication;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class GameHub extends Activity {
+
+    private Button hub, profile, leaderboard, create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_hub);
+
+        hub = (Button) findViewById(R.id.hub_tab);
+        profile = (Button) findViewById(R.id.profile_tab);
+        leaderboard = (Button) findViewById(R.id.leaderboard_tab);
+        create = (Button) findViewById(R.id.create_tab);
+
+        hub.setEnabled(false);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameHub.this, ProfileTab.class));
+                finish();
+            }
+        });
+
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameHub.this, LeaderboardTab.class));
+                finish();
+            }
+        });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameHub.this, CreateGameTab.class));
+                finish();
+            }
+        });
     }
 
 

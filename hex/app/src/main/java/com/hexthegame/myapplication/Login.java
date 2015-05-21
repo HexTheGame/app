@@ -54,6 +54,7 @@ public class Login extends Activity
         mSignInClicked = false;
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         startActivity(new Intent(Login.this, GameHub.class));
+        finish();
     }
 
     @Override
