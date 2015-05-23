@@ -8,18 +8,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 import com.hexthegame.myapplication.R;
+import com.squareup.picasso.Picasso;
 
+public class ProfileTab extends Activity{
 
-public class ProfileTab extends Activity {
-
-    private Button hub, profile, leaderboard, create;
+    private Button hub, profile, leaderboard, create, sign_out;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_hub);
+        setContentView(R.layout.activity_profile_tab);
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
 
@@ -27,9 +34,11 @@ public class ProfileTab extends Activity {
         profile = (Button) findViewById(R.id.profile_tab);
         leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
+        sign_out = (Button) findViewById(R.id.sign_out_button);
+        mGoogleApiClient = Login.mGoogleApiClient;
 
         profile.setEnabled(false);
-
+        retrievePic();
         hub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,12 +63,40 @@ public class ProfileTab extends Activity {
             }
         });
 
+        sign_out.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(mGoogleApiClient.isConnected()) {
+                    startActivity(new Intent(ProfileTab.this, Login.class));
+                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                    mGoogleApiClient.disconnect();
+                    finish();
+                }
+            }
+        });
     }
 
+    public void retrievePic(){
+        if (mGoogleApiClient.isConnected() && Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+            Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+            String personName = currentPerson.getDisplayName();
+            String photoURL = currentPerson.getImage().getUrl();
+            String profileURL = currentPerson.getUrl();
+
+            ImageView profile_pic = (ImageView)findViewById(R.id.profile_pic);
+            Picasso.with(getApplicationContext())
+                    .load(photoURL)
+                    .resize(100,100)
+                    .into(profile_pic);
+
+        }
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game_hub, menu);
         return true;
     }

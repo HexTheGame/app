@@ -25,6 +25,7 @@ import android.graphics.Typeface;
 public class SplashScreen extends Activity {
 
     private static int SPLASH_TIME_OUT = 3000;
+    public static boolean loggedInBefore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,11 @@ public class SplashScreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run(){
+            //if(loggedInBefore)
+            //    startActivity(new Intent(SplashScreen.this,GameHub.class));
+            //else
                 startActivity(new Intent(SplashScreen.this, Login.class));
-                finish();
+            finish();
             }
         }, SPLASH_TIME_OUT);
     }

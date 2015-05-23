@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -19,7 +20,7 @@ public class Login extends Activity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 0;
-    private GoogleApiClient mGoogleApiClient;
+    public static GoogleApiClient mGoogleApiClient;
     private boolean mSignInClicked;
     private boolean mIntentInProgress;
     private SignInButton mSignInButton;
@@ -35,8 +36,9 @@ public class Login extends Activity
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
+
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        mSignInButton.setStyle(1, 0);
+        mSignInButton.setStyle(1, 1);
 
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,13 +49,17 @@ public class Login extends Activity
                 }
             }
         });
+
+        RelativeLayout layout = (RelativeLayout)findViewById(R.id.background);
+        layout.setBackground(getResources().getDrawable(R.drawable.background));
     }
 
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(Login.this, GameHub.class));
+        Intent i = new Intent(Login.this, GameHub.class);
+        startActivity(i);
         finish();
     }
 
@@ -102,9 +108,5 @@ public class Login extends Activity
 
     protected void onStop() {
         super.onStop();
-
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
     }
 }

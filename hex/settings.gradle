@@ -1,1 +1,2 @@
-include ':app'
+include ':app',':picasso'
+project(':picasso').projectDir = new File('libs/picasso')

@@ -19,7 +19,7 @@ public class CreateGameTab extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_hub);
+        setContentView(R.layout.activity_create_game_tab);
 
         hub = (Button) findViewById(R.id.hub_tab);
         profile = (Button) findViewById(R.id.profile_tab);

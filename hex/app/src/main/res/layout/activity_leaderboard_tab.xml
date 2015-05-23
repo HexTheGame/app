@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
         android:showDividers="none">
 
         <Button
@@ -34,7 +35,7 @@
             android:text="Hub"
             android:id="@+id/hub_tab"
             android:background="#c4242424"
-            android:textColor="#ffc4c4c4"
+            android:textColor="#ffdfdfdf"
             android:layout_alignTop="@+id/imageView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -60,7 +61,7 @@
             android:text="Leaderboard"
             android:id="@+id/leaderboard_tab"
             android:background="#c4242424"
-            android:textColor="#ffdfdfdf"
+            android:textColor="#ffc4c4c4"
             android:layout_alignTop="@+id/imageView"
             android:layout_toRightOf="@+id/profile_tab"
             android:layout_toEndOf="@+id/profile_tab"
