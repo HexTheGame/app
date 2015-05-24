@@ -3,25 +3,23 @@ package com.hexthegame.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.hexthegame.myapplication.R;
 import com.squareup.picasso.Picasso;
 
 public class ProfileTab extends Activity{
 
     private Button hub, profile, leaderboard, create, sign_out;
     private GoogleApiClient mGoogleApiClient;
+    private TextView nameTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class ProfileTab extends Activity{
         leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
         sign_out = (Button) findViewById(R.id.sign_out_button);
+        nameTxt = (TextView) findViewById(R.id.nameTxt);
         mGoogleApiClient = Login.mGoogleApiClient;
 
         profile.setEnabled(false);
@@ -63,10 +62,10 @@ public class ProfileTab extends Activity{
             }
         });
 
-        sign_out.setOnClickListener(new View.OnClickListener(){
+        sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(mGoogleApiClient.isConnected()) {
+            public void onClick(View view) {
+                if (mGoogleApiClient.isConnected()) {
                     startActivity(new Intent(ProfileTab.this, Login.class));
                     Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
                     mGoogleApiClient.disconnect();
@@ -74,6 +73,7 @@ public class ProfileTab extends Activity{
                 }
             }
         });
+
     }
 
     public void retrievePic(){
@@ -83,6 +83,7 @@ public class ProfileTab extends Activity{
             String photoURL = currentPerson.getImage().getUrl();
             String profileURL = currentPerson.getUrl();
 
+            nameTxt.setText(personName);
             ImageView profile_pic = (ImageView)findViewById(R.id.profile_pic);
             Picasso.with(getApplicationContext())
                     .load(photoURL)

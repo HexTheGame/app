@@ -1,20 +1,11 @@
 package com.hexthegame.myapplication;
 
 import com.hexthegame.myapplication.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
-
-import java.lang.Object;
-import android.graphics.Typeface;
-
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
