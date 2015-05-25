@@ -7,10 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 public class LeaderboardTab extends Activity {
 
     private Button hub, profile, leaderboard, create;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class LeaderboardTab extends Activity {
         profile = (Button) findViewById(R.id.profile_tab);
         leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
-
+        mGoogleApiClient = Login.mGoogleApiClient;
         leaderboard.setEnabled(false);
 
         profile.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +52,23 @@ public class LeaderboardTab extends Activity {
                 finish();
             }
         });
+
+        onShowLeaderboardsRequested();
     }
 
+    private boolean isSignedIn() {
+        return (mGoogleApiClient != null && mGoogleApiClient.isConnected());
+    }
+
+    public void onShowLeaderboardsRequested() {
+        if (isSignedIn() && Games.Leaderboards != null) {
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_scores)),
+                    7);
+        }
+        else {
+            Toast.makeText(this, "Leaderboards Unavailable", Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,5 +90,10 @@ public class LeaderboardTab extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
     }
 }

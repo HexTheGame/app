@@ -11,15 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.squareup.picasso.Picasso;
 
 public class ProfileTab extends Activity{
 
-    private Button hub, profile, leaderboard, create, sign_out;
+    private Button hub, profile, leaderboard, create, sign_out, test;
     private GoogleApiClient mGoogleApiClient;
     private TextView nameTxt;
+    ImageView profile_pic;
+    private int profPicHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +31,17 @@ public class ProfileTab extends Activity{
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
 
+        profile_pic = (ImageView)findViewById(R.id.profile_pic);
         hub = (Button) findViewById(R.id.hub_tab);
         profile = (Button) findViewById(R.id.profile_tab);
         leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
         sign_out = (Button) findViewById(R.id.sign_out_button);
         nameTxt = (TextView) findViewById(R.id.nameTxt);
+        test = (Button) findViewById(R.id.send);
         mGoogleApiClient = Login.mGoogleApiClient;
 
         profile.setEnabled(false);
-        retrievePic();
         hub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +78,18 @@ public class ProfileTab extends Activity{
             }
         });
 
+        test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_scores), 777);
+            }
+        });
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        profPicHeight = profile_pic.getHeight();
+        retrievePic();
     }
 
     public void retrievePic(){
@@ -84,15 +100,11 @@ public class ProfileTab extends Activity{
             String profileURL = currentPerson.getUrl();
 
             nameTxt.setText(personName);
-            ImageView profile_pic = (ImageView)findViewById(R.id.profile_pic);
             Picasso.with(getApplicationContext())
                     .load(photoURL)
-                    .resize(100,100)
+                    .resize(0, profPicHeight)
                     .into(profile_pic);
-
         }
-
-
     }
 
     @Override

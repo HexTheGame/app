@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">Hex</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_game_hub">Game Hub</string>
+    <string name="title_activity_game_hub">Games</string>
     <string name="title_activity_profile_tab">Profile</string>
     <string name="title_activity_leaderboard_tab">Leaderboard</string>
-    <string name="title_activity_create_game_tab">Create Game</string>
+    <string name="title_activity_create_game_tab">New Game</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>

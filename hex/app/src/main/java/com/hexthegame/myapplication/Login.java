@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.common.SignInButton;
 
@@ -31,6 +32,7 @@ public class Login extends Activity
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
+                .addApi(Games.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
 
