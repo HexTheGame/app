@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class CreateGameTab extends Activity {
 
-    private Button hub, profile, leaderboard, create;
+    private Button hub, profile, create;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,6 @@ public class CreateGameTab extends Activity {
 
         hub = (Button) findViewById(R.id.hub_tab);
         profile = (Button) findViewById(R.id.profile_tab);
-        leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
 
         create.setEnabled(false);
@@ -32,14 +31,6 @@ public class CreateGameTab extends Activity {
             }
         });
 
-        leaderboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CreateGameTab.this, LeaderboardTab.class));
-                finish();
-            }
-        });
-
         hub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +39,6 @@ public class CreateGameTab extends Activity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

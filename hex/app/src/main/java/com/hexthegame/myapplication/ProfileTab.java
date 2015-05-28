@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -18,11 +20,12 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileTab extends Activity{
 
-    private Button hub, profile, leaderboard, create, sign_out, test;
+    private Button hub, profile, create, sign_out, test;
     private GoogleApiClient mGoogleApiClient;
     private TextView nameTxt;
     ImageView profile_pic;
     private int profPicHeight;
+    private ImageButton trophy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +37,11 @@ public class ProfileTab extends Activity{
         profile_pic = (ImageView)findViewById(R.id.profile_pic);
         hub = (Button) findViewById(R.id.hub_tab);
         profile = (Button) findViewById(R.id.profile_tab);
-        leaderboard = (Button) findViewById(R.id.leaderboard_tab);
         create = (Button) findViewById(R.id.create_tab);
         sign_out = (Button) findViewById(R.id.sign_out_button);
         nameTxt = (TextView) findViewById(R.id.nameTxt);
         test = (Button) findViewById(R.id.send);
+        trophy = (ImageButton) findViewById(R.id.trophy);
         mGoogleApiClient = Login.mGoogleApiClient;
 
         profile.setEnabled(false);
@@ -46,14 +49,6 @@ public class ProfileTab extends Activity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ProfileTab.this, GameHub.class));
-                finish();
-            }
-        });
-
-        leaderboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileTab.this, LeaderboardTab.class));
                 finish();
             }
         });
@@ -84,11 +79,34 @@ public class ProfileTab extends Activity{
                 Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.leaderboard_scores), 777);
             }
         });
+
+        trophy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowLeaderboardsRequested();
+            }
+        });
     }
+
+    private boolean isSignedIn() {
+        return (mGoogleApiClient != null && mGoogleApiClient.isConnected());
+    }
+
+    public void onShowLeaderboardsRequested() {
+        if (isSignedIn() && Games.Leaderboards != null) {
+            startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, getString(R.string.leaderboard_scores)),
+                    7);
+        }
+        else {
+            Toast.makeText(this, "Leaderboards Unavailable", Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
         profPicHeight = profile_pic.getHeight();
+
         retrievePic();
     }
 
